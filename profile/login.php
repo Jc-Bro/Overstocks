@@ -1,11 +1,8 @@
 <?php
-// login.php
-
 global $pdo;
 require '../config.php';
 session_start();
 
-// Vérifier que la méthode HTTP utilisée est POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $emailOfUser = $_POST['emailOfUser'] ?? '';
     $password = $_POST['password'] ?? '';
@@ -14,8 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Please fill all required fields!");
     }
 
-    // Préparer une requête SQL pour sélectionner l'utilisateur
-    $sql = "select id_user, nameOfUser, passwordHash from user where emailOfUser = ?";
+    $sql = "SELECT id_user, nameOfUser, emailOfUser, passwordHash FROM user WHERE emailOfUser = ?";
 
     try {
         $stmt = $pdo->prepare($sql);
@@ -23,10 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['passwordHash'])) {
-            // Authentification réussie
             $_SESSION['user_id'] = $user['id_user'];
             $_SESSION['nameOfUser'] = $user['nameOfUser'];
-            echo "Logged in successfully!";
+            $_SESSION['emailOfUser'] = $user['emailOfUser'];
+            header("Location: ../home.php");
+            exit;
         } else {
             echo "Invalid email or password!";
         }
@@ -36,4 +33,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Please use the POST method to send data.";
 }
+?>
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+</head>
+<body>
+<h2>Connexion</h2>
+<form action="login.php" method="post">
+    <label>Email: <input type="email" name="emailOfUser" required></label><br>
+    <label>Mot de passe: <input type="password" name="password" required></label><br>
+    <button type="submit">Se connecter</button>
+</form>
+</body>
+</html>

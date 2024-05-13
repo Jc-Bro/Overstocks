@@ -13,8 +13,8 @@ create table user (
     addressOfUser varchar(255),
     townOfUser varchar(100),
     postalCodeOfUser varchar(10),
-    type enum('professionnel', 'particulier'),
-    siret varchar(14)  -- Ne sera rempli que pour les professionnels
+    typeOfUser enum('professionnel', 'particulier'),
+    siretOfUser varchar(14)  -- Ne sera rempli que pour les professionnels
 );
 
 drop table if exists product;
