@@ -15,7 +15,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
 <h1>Page d'Accueil</h1>
 
 <?php if ($isLoggedIn): ?>
-<p>Bonjour, <?= htmlspecialchars($_SESSION['firstNameOfUser']) ?>!</p>
+<p>Bonjour, <?= htmlspecialchars($_SESSION['nameOfUser']) ?>!</p>
 <a href="profile/profile.php">Profil</a>
 <a href="./profile/logout.php">Déconnexion</a>
 <?php else: ?>

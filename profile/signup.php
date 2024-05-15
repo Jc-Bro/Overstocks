@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
     // Préparer une requête SQL pour insérer l'utilisateur
-    $sql = "INSERT INTO user (nameOfUser, firstNameOfUser, emailOfUser, passwordHash, phoneOfUser, addressOfUser, townOfUser, postalCodeOfUser, type, siret) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO user (nameOfUser, firstNameOfUser, emailOfUser, passwordHash, phoneOfUser, addressOfUser, townOfUser, postalCodeOfUser, typeOfUser, siretOfUser) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try {
         $stmt = $pdo->prepare($sql);
