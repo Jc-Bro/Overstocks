@@ -38,9 +38,9 @@ create table subscription (
     max_product int
 );
 
-drop table if exists hamper;
-create table hamper (
-    id int auto_increment primary key,
+drop table if exists cart;
+create table cart (
+    id_cart int auto_increment primary key,
     user_id int,
     product_id int,
     quantity int,
