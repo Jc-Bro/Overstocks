@@ -2,68 +2,88 @@ drop database if exists db_overstocks;
 create database db_overstocks;
 use db_overstocks;
 
-drop table if exists user;
-create table user (
-    id_user int auto_increment primary key,
-    nameOfUser varchar(100),
-    firstNameOfUser varchar(100),
-    emailOfUser varchar(100) UNIQUE,
-    passwordHash varchar(255),
-    phoneOfUser varchar(20),
-    addressOfUser varchar(255),
-    townOfUser varchar(100),
-    postalCodeOfUser varchar(10),
-    typeOfUser enum('professionnel', 'particulier'),
-    siretOfUser varchar(14)  -- Ne sera rempli que pour les professionnels
+drop table if exists User;
+CREATE TABLE User (
+                      id_user INT AUTO_INCREMENT PRIMARY KEY,
+                      nameOfUser VARCHAR(20),
+                      firstNameOfUser VARCHAR(20),
+                      mailOfUser VARCHAR(255),
+                      phoneOfUser VARCHAR(10),
+                      addressOfUser VARCHAR(255),
+                      townOfUser VARCHAR(100),
+                      postalCodeOfUser VARCHAR(10),
+                      typeOfUser ENUM('particulier', 'professionnel')
 );
 
-drop table if exists product;
-create table product (
-    id_product int auto_increment primary key,
-    pictureOfProduct varchar(255),  -- Chemin du fichier ou URL de l'image
-    nameOfProduct varchar(100),
-    descriptionOfProduct varchar(255),
-    categoryOfProduct enum('matière première', 'mobilier', 'electronique', 'textile', 'mécanique'),
-    stockOfProduct INT,
-    sizeOfProduct enum('S', 'M', 'L', 'XL'),  -- Seulement pour les textiles
-    dimensionOfProcut varchar(50)  -- Format "longueur x largeur x hauteur"
+-- Table Seller
+drop table if exists Seller;
+CREATE TABLE Seller (
+                        id_seller INT AUTO_INCREMENT PRIMARY KEY,
+                        id_user INT,
+                        siret INT,
+                        FOREIGN KEY (id_user) REFERENCES User(id_user)
 );
 
-drop table if exists subscription;
-create table subscription (
-    id_subscription int auto_increment primary key,
-    styleOfSubscription enum('overprime', 'overprime plus'),
-    costOfSubscription decimal(5,2),  -- Prix en euros
-    commissionOfSubscription decimal(5,2),
-    max_product int
+-- Table Subscription
+drop table if exists Subscription;
+CREATE TABLE Subscription (
+                              id_subscription INT AUTO_INCREMENT PRIMARY KEY,
+                              styleOfSubscription ENUM('OverBasics', 'OverPrime', 'UltraPrime'),
+                              costOfSubscription INT,
+                              commissionOfSubscription DECIMAL(10, 2),
+                              numberOfSales INT
 );
 
-drop table if exists cart;
-create table cart (
-    id_cart int auto_increment primary key,
-    user_id int,
-    product_id int,
-    quantity int,
-    foreign key (user_id) references user(id_user),
-    foreign key (product_id) references product(id_product)
+-- Table Cart
+drop table if exists Cart;
+CREATE TABLE Cart (
+                      id_cart INT AUTO_INCREMENT PRIMARY KEY,
+                      id_user INT,
+                      costOfPayment DECIMAL(10, 2),
+                      contentOfCart TEXT,
+                      FOREIGN KEY (id_user) REFERENCES User(id_user)
 );
 
-drop table if exists payment;
-create table payment (
-    id int auto_increment primary key,
-    user_id int,
-    moyen varchar(50),
-    montant decimal(10,2),
-    foreign key (user_id) references user(id_user)
+-- Table Product
+drop table if exists Product;
+CREATE TABLE Product (
+                         id_product INT AUTO_INCREMENT PRIMARY KEY,
+                         productName VARCHAR(255)
 );
 
--- Relation entre user et product --
-alter table product add column user_id int;
-alter table product add foreign key (user_id) references user(id_user);
+-- Table ProductFromSeller
+drop table if exists ProductFromSeller;
+CREATE TABLE ProductFromSeller (
+                                   id_product INT,
+                                   id_seller INT,
+                                   cost DECIMAL(10, 2),
+                                   PRIMARY KEY (id_product, id_seller),
+                                   FOREIGN KEY (id_product) REFERENCES Product(id_product),
+                                   FOREIGN KEY (id_seller) REFERENCES Seller(id_seller)
+);
 
--- relation entre user et subscription --
-alter table user add column subscription_id int;
-alter table user add foreign key (subscription_id) references subscription(id_subscription);
+-- Table Payment
+drop table if exists Payment;
+CREATE TABLE Payment (
+                         id_payment INT AUTO_INCREMENT PRIMARY KEY,
+                         id_user INT,
+                         meansOfPayments ENUM('carte bancaire', 'paypal'),
+                         FOREIGN KEY (id_user) REFERENCES User(id_user)
+);
 
+-- Association Seller to Subscription (one-to-many)
+ALTER TABLE Seller
+    ADD COLUMN id_subscription INT,
+    ADD FOREIGN KEY (id_subscription) REFERENCES Subscription(id_subscription);
 
-select * from user
+-- Association Cart to ProductFromSeller (many-to-many)
+drop table if exists CartProduct;
+CREATE TABLE CartProduct (
+                             id_cart INT,
+                             id_product INT,
+                             id_seller INT,
+                             PRIMARY KEY (id_cart, id_product, id_seller),
+                             FOREIGN KEY (id_cart) REFERENCES Cart(id_cart),
+                             FOREIGN KEY (id_product) REFERENCES Product(id_product),
+                             FOREIGN KEY (id_seller) REFERENCES Seller(id_seller)
+);

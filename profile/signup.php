@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $townOfUser = $_POST['townOfUser'] ?? '';
     $postalCodeOfUser = $_POST['postalCodeOfUser'] ?? '';
     $type = $_POST['type'] ?? '';
-    $siret = $_POST['siret'] ?? '';
+    $siret = $_POST['siret'] ?? null;
 
     if (empty($emailOfUser) || empty($password) || empty($nameOfUser) || empty($firstNameOfUser)) {
         die("Please fill all required fields!");
@@ -25,14 +25,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Hasher le mot de passe
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-    // Préparer une requête SQL pour insérer l'utilisateur
-    $sql = "INSERT INTO user (nameOfUser, firstNameOfUser, emailOfUser, passwordHash, phoneOfUser, addressOfUser, townOfUser, postalCodeOfUser, typeOfUser, siretOfUser) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // Commencer une transaction
+    $pdo->beginTransaction();
 
     try {
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$nameOfUser, $firstNameOfUser, $emailOfUser, $passwordHash, $phoneOfUser, $addressOfUser, $townOfUser, $postalCodeOfUser, $type, $siret]);
+        // Préparer une requête SQL pour insérer l'utilisateur
+        $sqlUser = "INSERT INTO User (nameOfUser, firstNameOfUser, mailOfUser, passwordHash, phoneOfUser, addressOfUser, townOfUser, postalCodeOfUser, typeOfUser) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmtUser = $pdo->prepare($sqlUser);
+        $stmtUser->execute([$nameOfUser, $firstNameOfUser, $emailOfUser, $passwordHash, $phoneOfUser, $addressOfUser, $townOfUser, $postalCodeOfUser, $type]);
+
+        // Récupérer l'ID de l'utilisateur nouvellement inséré
+        $userId = $pdo->lastInsertId();
+
+        // Si le type d'utilisateur est "professionnel", insérer dans la table Seller
+        if ($type === 'professionnel' && !empty($siret)) {
+            $sqlSeller = "INSERT INTO Seller (id_user, siret) VALUES (?, ?)";
+            $stmtSeller = $pdo->prepare($sqlSeller);
+            $stmtSeller->execute([$userId, $siret]);
+        }
+
+        // Commit la transaction
+        $pdo->commit();
         echo "User registered successfully!";
     } catch (PDOException $e) {
+        // En cas d'erreur, rollback la transaction
+        $pdo->rollBack();
         if ($e->getCode() == 23000) {
             echo "This email is already registered!";
         } else {
@@ -42,7 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Please use the POST method to send data.";
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +66,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
+    <script>
+        function toggleSiretField() {
+            const typeField = document.querySelector('select[name="type"]');
+            const siretField = document.querySelector('input[name="siret"]');
+            if (typeField.value === 'professionnel') {
+                siretField.disabled = false;
+            } else {
+                siretField.disabled = true;
+                siretField.value = '';
+            }
+        }
+    </script>
 </head>
 <body>
 <h2>Inscription</h2>
@@ -63,14 +91,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <label>Ville: <input type="text" name="townOfUser"></label><br>
     <label>Code Postal: <input type="text" name="postalCodeOfUser"></label><br>
     <label>Type:
-        <select name="type">
+        <select name="type" onchange="toggleSiretField()">
             <option value="professionnel">Professionnel</option>
             <option value="particulier">Particulier</option>
         </select>
     </label><br>
-    <label>SIRET (si professionnel): <input type="text" name="siret"></label><br>
+    <label>SIRET (si professionnel): <input type="text" name="siret" disabled></label><br>
     <button type="submit">S'inscrire</button>
 </form>
 </body>
 </html>
-
