@@ -1,6 +1,6 @@
-drop database if exists db_overstocks;
-create database db_overstocks;
-use db_overstocks;
+drop database if exists u535044803_db_overstocks;
+create database u535044803_db_overstocks;
+use u535044803_db_overstocks;
 
 drop table if exists User;
 CREATE TABLE User (
@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS Product;
 CREATE TABLE Product (
                          id_product INT AUTO_INCREMENT PRIMARY KEY,
                          productName VARCHAR(255) NOT NULL,
-                         productImage VARCHAR(255) NOT NULL,
+                         productImage BLOB NOT NULL,
                          productDescription TEXT NOT NULL,
                          productCategory ENUM('mobilier', 'éléctronique', 'matières premières', 'textile', 'mécanique', 'autres') NOT NULL,
                          productStock INT DEFAULT 0,
@@ -96,5 +96,10 @@ CREATE TABLE CartProduct (
                              FOREIGN KEY (id_seller) REFERENCES Seller(id_seller)
 );
 
-SELECT * FROM User
+-- Table de tests
+CREATE TABLE Test (
+    id_test INT
+);
+
+SELECT * FROM User;
 SELECT * FROM Product
