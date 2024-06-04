@@ -10,4 +10,4 @@ session_destroy();
 
 echo "Logged out successfully!";
 
-header("Location: ../home.php");
+header("Location: ../index.php");

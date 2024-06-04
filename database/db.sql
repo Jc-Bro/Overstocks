@@ -8,12 +8,14 @@ CREATE TABLE User (
                       nameOfUser VARCHAR(20),
                       firstNameOfUser VARCHAR(20),
                       mailOfUser VARCHAR(255),
+                      passwordHash VARCHAR(255),
                       phoneOfUser VARCHAR(10),
                       addressOfUser VARCHAR(255),
                       townOfUser VARCHAR(100),
                       postalCodeOfUser VARCHAR(10),
                       typeOfUser ENUM('particulier', 'professionnel')
 );
+
 
 -- Table Seller
 drop table if exists Seller;
@@ -45,10 +47,16 @@ CREATE TABLE Cart (
 );
 
 -- Table Product
-drop table if exists Product;
+DROP TABLE IF EXISTS Product;
 CREATE TABLE Product (
                          id_product INT AUTO_INCREMENT PRIMARY KEY,
-                         productName VARCHAR(255)
+                         productName VARCHAR(255) NOT NULL,
+                         productImage VARCHAR(255) NOT NULL,
+                         productDescription TEXT NOT NULL,
+                         productCategory ENUM('mobilier', 'éléctronique', 'matières premières', 'textile', 'mécanique', 'autres') NOT NULL,
+                         productStock INT DEFAULT 0,
+                         productSize VARCHAR(50),
+                         productDimensions VARCHAR(50)
 );
 
 -- Table ProductFromSeller
@@ -87,3 +95,6 @@ CREATE TABLE CartProduct (
                              FOREIGN KEY (id_product) REFERENCES Product(id_product),
                              FOREIGN KEY (id_seller) REFERENCES Seller(id_seller)
 );
+
+SELECT * FROM User
+SELECT * FROM Product

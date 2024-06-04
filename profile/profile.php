@@ -1,12 +1,22 @@
 <?php
 session_start(); // Démarrer la session
 
-// Rediriger vers home.php si l'utilisateur n'est pas connecté
+// Rediriger vers index.php si l'utilisateur n'est pas connecté
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../home.php");
+    header("Location: ../index.php");
     exit;
 }
 
+// Variables de session
+$firstNameOfUser = $_SESSION['firstNameOfUser'] ?? '';
+$nameOfUser = $_SESSION['nameOfUser'] ?? '';
+$emailOfUser = $_SESSION['emailOfUser'] ?? '';
+$phoneOfUser = $_SESSION['phoneOfUser'] ?? '';
+$addressOfUser = $_SESSION['addressOfUser'] ?? '';
+$townOfUser = $_SESSION['townOfUser'] ?? '';
+$postalCodeOfUser = $_SESSION['postalCodeOfUser'] ?? '';
+$typeOfUser = $_SESSION['typeOfUser'] ?? '';
+$siretOfUser = $_SESSION['siretOfUser'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,17 +26,21 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
 <h1>Profil de l'Utilisateur</h1>
-<p>Prénom : <?= htmlspecialchars($_SESSION['firstNameOfUser'] ?? '') ?></p>
-<p>Nom : <?= htmlspecialchars($_SESSION['nameOfUser'] ?? '') ?></p>
-<p>Email : <?= htmlspecialchars($_SESSION['emailOfUser'] ?? '') ?></p>
-<p>Téléphone : <?= htmlspecialchars($_SESSION['phoneOfUser'] ?? '') ?></p>
-<p>Adresse : <?= htmlspecialchars($_SESSION['addressOfUser'] ?? '') ?></p>
-<p>Ville : <?= htmlspecialchars($_SESSION['townOfUser'] ?? '') ?></p>
-<p>Code postal : <?= htmlspecialchars($_SESSION['postalCodeOfUser'] ?? '') ?></p>
-<p>Type : <?= htmlspecialchars($_SESSION['typeOfUser'] ?? '') ?></p>
-<p>Numéro de SIRET : <?= htmlspecialchars($_SESSION['siretOfUser'] ?? '') ?></p>
+<p>Prénom : <?= htmlspecialchars($firstNameOfUser) ?></p>
+<p>Nom : <?= htmlspecialchars($nameOfUser) ?></p>
+<p>Email : <?= htmlspecialchars($emailOfUser) ?></p>
+<p>Téléphone : <?= htmlspecialchars($phoneOfUser) ?></p>
+<p>Adresse : <?= htmlspecialchars($addressOfUser) ?></p>
+<p>Ville : <?= htmlspecialchars($townOfUser) ?></p>
+<p>Code postal : <?= htmlspecialchars($postalCodeOfUser) ?></p>
+<p>Type : <?= htmlspecialchars($typeOfUser) ?></p>
 
-<a href="../home.php">Accueil</a> |
-<a href="logout.php">Déconnexion</a>
+<?php if ($typeOfUser === 'professionnel'): ?>
+    <p>Numéro de SIRET : <?= htmlspecialchars($siretOfUser) ?></p>
+<?php endif; ?>
+
+<a href="../index.php">Accueil</a> |
+<a href="logout.php">Déconnexion</a> |
+<a href="addproduct.php">Ajouter un produit</a>
 </body>
 </html>
