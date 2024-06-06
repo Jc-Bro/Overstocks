@@ -1,8 +1,8 @@
 <?php
 session_start(); // Démarrer la session
 
-// Rediriger vers index.php si l'utilisateur n'est pas connecté
-if (!isset($_SESSION['user_id'])) {
+// Rediriger vers index.php si l'utilisateur n'est pas connecté ou s'il n'est pas professionnel
+if (!isset($_SESSION['user_id']) || $_SESSION['typeOfUser'] !== 'professionnel') {
     header("Location: ../index.php");
     exit;
 }
@@ -11,6 +11,7 @@ global $pdo;
 require '../config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $userId = $_SESSION['user_id'];
     $productName = $_POST['productName'] ?? '';
     $productDescription = $_POST['productDescription'] ?? '';
     $productCategory = $_POST['productCategory'] ?? '';
@@ -24,24 +25,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Gérer le téléchargement de l'image
-    $targetDir = "uploads/";
-    $targetFile = $targetDir . basename($_FILES["productImage"]["name"]);
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    $imageData = file_get_contents($_FILES['productImage']['tmp_name']);
+    $imageFileType = strtolower(pathinfo($_FILES['productImage']['name'], PATHINFO_EXTENSION));
     $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
 
     if (!in_array($imageFileType, $allowedTypes)) {
         die("Désolé, seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.");
     }
 
-    if (!move_uploaded_file($_FILES["productImage"]["tmp_name"], $targetFile)) {
-        die("Désolé, une erreur s'est produite lors du téléchargement de votre fichier.");
-    }
-
     // Préparer et exécuter la requête SQL pour insérer le produit
     try {
-        $sql = "INSERT INTO Product (productName, productImage, productDescription, productCategory, productStock, productSize, productDimensions) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO Product (id_user, productName, productImage, productDescription, productCategory, productStock, productSize, productDimensions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$productName, $targetFile, $productDescription, $productCategory, $productStock, $productSize, $productDimensions]);
+        $stmt->bindParam(1, $userId);
+        $stmt->bindParam(2, $productName);
+        $stmt->bindParam(3, $imageData, PDO::PARAM_LOB);
+        $stmt->bindParam(4, $productDescription);
+        $stmt->bindParam(5, $productCategory);
+        $stmt->bindParam(6, $productStock, PDO::PARAM_INT);
+        $stmt->bindParam(7, $productSize);
+        $stmt->bindParam(8, $productDimensions);
+        $stmt->execute();
         echo "Produit ajouté avec succès !";
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
