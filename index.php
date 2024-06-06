@@ -12,7 +12,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
     <title>Accueil</title>
 </head>
 <body>
-<h1>Page d'Accueil</h1>
+<h1 class="text-amber-400">Page d'Accueil</h1>
 
 <?php if ($isLoggedIn): ?>
 <p>Bonjour, <?= htmlspecialchars($_SESSION['firstNameOfUser']) ?>!</p>
