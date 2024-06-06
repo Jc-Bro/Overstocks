@@ -88,10 +88,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             toggleSiretField(); // Ensure the correct display when the page loads
         });
     </script>
+    <style>
+        form {
+            max-width: 800px;margin: 0 auto;
+        }
+        label {
+             display: flex;
+            justify-content: space-between;
+         }
+        label input{
+            margin-left: 2em;
+        }
+    </style>
 </head>
 <body>
 <h2>Inscription</h2>
-<form action="signup.php" method="post">
+<form action="signup.php" method="post" style="">
     <label>Nom* <input type="text" name="nameOfUser" required></label><br>
     <label>Prénom* <input type="text" name="firstNameOfUser" required></label><br>
     <label>Email* <input type="email" name="emailOfUser" required></label><br>
