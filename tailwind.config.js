@@ -1,9 +1,12 @@
-module.exports = {
-    content: [
-        './src/styles/tailwind.css', // Modifiez le chemin selon la structure de votre projet
-    ],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+      './src/input.css',
+      './index.php'
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 }
+
