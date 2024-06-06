@@ -12,6 +12,6 @@ try {
     // Définir le mode d'erreur PDO à exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("Could not connect to the database $dbname :" . $e->getMessage());
+    die("Could not connect to the database $dbname: " . $e->getMessage());
 }
-
+?>

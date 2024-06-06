@@ -5,7 +5,11 @@ export default {
       './index.php'
   ],
   theme: {
-    extend: {},
+    extend: {
+        fontFamily: {
+            geologica: ['Geologica', 'sans-serif'],
+        },
+    },
   },
   plugins: [],
 }

@@ -1,6 +1,4 @@
 <?php
-// signup.php
-
 global $pdo;
 require '../config.php';
 
@@ -46,8 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Commit la transaction
         $pdo->commit();
-        // Redirection vers la page d'accueil après l'inscription réussie
-        header("Location: ../index.php");
+        echo "User registered successfully!";
+        header("Location: ../index.php"); // Rediriger vers la page d'accueil après l'inscription
         exit;
     } catch (PDOException $e) {
         // En cas d'erreur, rollback la transaction
@@ -68,7 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
-
     <script>
         function toggleSiretField() {
             const typeField = document.querySelector('select[name="type"]');
@@ -88,37 +85,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             toggleSiretField(); // Ensure the correct display when the page loads
         });
     </script>
-    <style>
-        form {
-            max-width: 800px;margin: 0 auto;
-        }
-        label {
-             display: flex;
-            justify-content: space-between;
-         }
-        label input{
-            margin-left: 2em;
-        }
-    </style>
 </head>
 <body>
 <h2>Inscription</h2>
-<form action="signup.php" method="post" style="">
-    <label>Nom* <input type="text" name="nameOfUser" required></label><br>
-    <label>Prénom* <input type="text" name="firstNameOfUser" required></label><br>
-    <label>Email* <input type="email" name="emailOfUser" required></label><br>
-    <label>Mot de passe* <input type="password" name="password" required></label><br>
-    <label>Téléphone <input type="text" name="phoneOfUser"></label><br>
-    <label>Adresse* <input type="text" name="addressOfUser" required></label><br>
-    <label>Ville* <input type="text" name="townOfUser" required></label><br>
-    <label>Code Postal* <input type="text" name="postalCodeOfUser" required></label><br>
-    <label>Type*
+<form action="signup.php" method="post">
+    <label>Nom: <input type="text" name="nameOfUser" required></label><br>
+    <label>Prénom: <input type="text" name="firstNameOfUser" required></label><br>
+    <label>Email: <input type="email" name="emailOfUser" required></label><br>
+    <label>Mot de passe: <input type="password" name="password" required></label><br>
+    <label>Téléphone: <input type="text" name="phoneOfUser"></label><br>
+    <label>Adresse: <input type="text" name="addressOfUser"></label><br>
+    <label>Ville: <input type="text" name="townOfUser"></label><br>
+    <label>Code Postal: <input type="text" name="postalCodeOfUser"></label><br>
+    <label>Type:
         <select name="type" onchange="toggleSiretField()">
             <option value="professionnel">Professionnel</option>
             <option value="particulier">Particulier</option>
         </select>
     </label><br>
-    <label id="siretLabel" style="display: none;">SIRET* <input type="text" name="siret" disabled></label><br>
+    <label id="siretLabel" style="display: none;">SIRET: <input type="text" name="siret" disabled required></label><br>
     <button type="submit">S'inscrire</button>
 </form>
 </body>
