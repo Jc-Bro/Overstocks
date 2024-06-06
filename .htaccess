@@ -6,5 +6,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^$ index.php [L]
 
 # Optionnel : pour rediriger aussi les accès direct à home.php vers la racine (URL sans home.php)
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.*)home\.php
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.*)index\.php
 RewriteRule ^index\.php$ / [L,R=301]
