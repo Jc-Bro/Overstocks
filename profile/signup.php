@@ -92,21 +92,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <h2>Inscription</h2>
 <form action="signup.php" method="post">
-    <label>Nom: <input type="text" name="nameOfUser" required></label><br>
-    <label>Prénom: <input type="text" name="firstNameOfUser" required></label><br>
-    <label>Email: <input type="email" name="emailOfUser" required></label><br>
-    <label>Mot de passe: <input type="password" name="password" required></label><br>
-    <label>Téléphone: <input type="text" name="phoneOfUser"></label><br>
-    <label>Adresse: <input type="text" name="addressOfUser"></label><br>
-    <label>Ville: <input type="text" name="townOfUser"></label><br>
-    <label>Code Postal: <input type="text" name="postalCodeOfUser"></label><br>
-    <label>Type:
+    <label>Nom* <input type="text" name="nameOfUser" required></label><br>
+    <label>Prénom* <input type="text" name="firstNameOfUser" required></label><br>
+    <label>Email* <input type="email" name="emailOfUser" required></label><br>
+    <label>Mot de passe* <input type="password" name="password" required></label><br>
+    <label>Téléphone <input type="text" name="phoneOfUser"></label><br>
+    <label>Adresse* <input type="text" name="addressOfUser" required></label><br>
+    <label>Ville* <input type="text" name="townOfUser" required></label><br>
+    <label>Code Postal* <input type="text" name="postalCodeOfUser" required></label><br>
+    <label>Type*
         <select name="type" onchange="toggleSiretField()">
             <option value="professionnel">Professionnel</option>
             <option value="particulier">Particulier</option>
         </select>
     </label><br>
-    <label id="siretLabel" style="display: none;">SIRET: <input type="text" name="siret" disabled></label><br>
+    <label id="siretLabel" style="display: none;">SIRET* <input type="text" name="siret" disabled></label><br>
     <button type="submit">S'inscrire</button>
 </form>
 </body>

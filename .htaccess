@@ -3,8 +3,8 @@ RewriteEngine On
 # Redirige les demandes vers home.php si le chemin est vide (pas de fichier ou dossier existant)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^$ home.php [L]
+RewriteRule ^$ index.php [L]
 
 # Optionnel : pour rediriger aussi les accès direct à home.php vers la racine (URL sans home.php)
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.*)home\.php
-RewriteRule ^home\.php$ / [L,R=301]
+RewriteRule ^index\.php$ / [L,R=301]
