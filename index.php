@@ -19,7 +19,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
         <div class="align-middle flex p-4 justify-between w-[80%] m-auto">
             <img src="img/logo_overstocks.png">
             <?php if ($isLoggedIn): ?>
-                <a href="profile/profile.php" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Profil</a>
+                <a href="profile/profile.php" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Mon compte</a>
                 <!-- <a href="./profile/logout.php">Déconnexion</a> -->
             <?php else: ?>
                 <div class="flex gap-6">
