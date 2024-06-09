@@ -49,66 +49,115 @@ if (!$pdo) {
 </head>
 <body>
 
-<section class="bg-[#15362f] h-24 mb-[30px]">
-    <div class="align-middle flex p-4 justify-between w-[80%] m-auto">
-        <a href="../index.php"><img src="../img/logo_overstocks.png"></a>
-        <?php if ($isLoggedIn): ?>
-            <a href="profile/profile.php" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Mon compte</a>
-        <?php else: ?>
-            <div class="flex gap-6">
-                <a href="./profile/login.php" class="flex justify-center self-center text-white border-[3px] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Se connecter</a>
-                <a href="./profile/signup.php" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">S'inscrire</a>
-            </div>
-        <?php endif; ?>
-    </div>
+<header>
+    <section class="bg-[#15362f] h-24 mb-[30px]">
+        <div class="align-middle flex p-4 justify-between w-[80%] m-auto">
+            <a href="../index.php"><img src="../img/logo_overstocks.png"></a>
+            <?php if ($isLoggedIn): ?>
+                <a href="profile/profile.php" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Mon compte</a>
+            <?php else: ?>
+                <div class="flex gap-6">
+                    <a href="./profile/login.php" class="flex justify-center self-center text-white border-[3px] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Se connecter</a>
+                    <a href="./profile/signup.php" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">S'inscrire</a>
+                </div>
+            <?php endif; ?>
+        </div>
 
-</section>
-<section class="w-[60%] m-auto">
+    </section>
+</header>
 
-    <!-- Ajouter le texte avec le nom et le prénom de l'utilisateur -->
-    <div class="flex justify-between items-baseline mb-[30px]">
-        <h2 class="font-geologica text-[55px] text-[#004D42] font-semibold">Bonjour, <?= htmlspecialchars($firstNameOfUser) ?> <?= htmlspecialchars($nameOfUser) ?>!</h2>
-        <a href="logout.php" class="underline">Se déconnecter</a>
-    </div>
-    <h3 class="text-[45px] mb-[50px] font-semibold">Paramètres</h3>
-    <div class="flex gap-[30px] mb-[30px]">
-        <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
-            <a href="infoprofile.php" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FFBB050] to-[#5EFCBD25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes informations</a>
-        </div>
-        <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
-            <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FFBB050] to-[#5EFCBD25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes favoris</a>
-        </div>
-    </div>
-    <div class="flex gap-[30px] mb-[]">
-        <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
-            <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FFBB050] to-[#5EFCBD25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes achats</a>
-        </div>
-        <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
-            <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FFBB050] to-[#5EFCBD25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Besoin d'aide ?</a>
-        </div>
-    </div>
+<main>
+    <section class="w-[60%] m-auto mb-[50px]">
 
-    <?php if ($typeOfUser === 'professionnel'): ?>
-        <h3 class="text-[45px] mb-[50px] mt-[50px font-semibold">Espace vendeur</h3>
+        <!-- Ajouter le texte avec le nom et le prénom de l'utilisateur -->
+        <div class="flex justify-between items-baseline mb-[30px]">
+            <h2 class="font-geologica text-[55px] text-[#004D42] font-semibold">Bonjour, <?= htmlspecialchars($firstNameOfUser) ?> <?= htmlspecialchars($nameOfUser) ?>!</h2>
+            <a href="logout.php" class="underline">Se déconnecter</a>
+        </div>
+        <h3 class="text-[45px] mb-[50px] font-semibold">Paramètres</h3>
         <div class="flex gap-[30px] mb-[30px]">
             <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
-                <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Ajout produit</a>
+                <a href="infoprofile.php" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FFBB050] to-[#5EFCBD25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes informations</a>
             </div>
             <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
-                <a href="myproduct.php" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes produits</a>
+                <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FFBB050] to-[#5EFCBD25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes favoris</a>
             </div>
         </div>
-        <div class="flex gap-[30px]">
+        <div class="flex gap-[30px] mb-[50px]">
             <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
-                <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes ventes</a>
+                <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FFBB050] to-[#5EFCBD25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes achats</a>
             </div>
             <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
-                <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Abonnement</a>
+                <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FFBB050] to-[#5EFCBD25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Besoin d'aide ?</a>
             </div>
         </div>
-    <?php endif; ?>
 
-</section>
+        <?php if ($typeOfUser === 'professionnel'): ?>
+            <h3 class="text-[45px] mb-[50px] mt-[50px font-semibold">Espace vendeur</h3>
+            <div class="flex gap-[30px] mb-[30px]">
+                <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
+                    <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Ajout produit</a>
+                </div>
+                <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
+                    <a href="myproduct.php" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes produits</a>
+                </div>
+            </div>
+            <div class="flex gap-[30px]">
+                <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
+                    <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes ventes</a>
+                </div>
+                <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
+                    <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Abonnement</a>
+                </div>
+            </div>
+        <?php endif; ?>
+
+    </section>
+</main>
+
+<footer>
+    <section class="bg-[#15362f] text-white">
+        <div class="w-[90%] flex pt-[40px] m-auto">
+            <div class="w-[50%]">
+                <a><img src="../img/logo_overstocks.png"></a>
+            </div>
+            <div class="w-[16%]">
+                <h5 class="text-[25px] font-normal mb-[20px]">Profil</h5>
+                <div class="grid">
+                    <a href="#" class="mb-[10px]">Informations</a>
+                    <a href="#" class="mb-[10px]">Abonnement</a>
+                    <a href="#" class="mb-[10px]">Aide</a>
+                </div>
+            </div>
+            <div class="w-[16%]">
+                <h5 class="text-[25px] font-normal text-white mb-[20px]">Produits</h5>
+                <div class="grid">
+                    <a href="#" class="mb-[10px]">Panier</a>
+                    <a href="#" class="mb-[10px]">Achats</a>
+                    <a href="#" class="mb-[10px]">Favoris</a>
+                </div>
+            </div>
+            <div class="w-[16%]">
+                <h5 class="text-[25px] font-normal mb-[20px]">Profil</h5>
+                <div class="flex gap-[30px]">
+                    <a href="#"><img src="../img/icone_linkedin.svg"></a>
+                    <a href="#"><img src="../img/icone_instagram.svg"></a>
+                    <a href="#"><img src="../img/icone_facebook.svg"></a>
+                </div>
+            </div>
+        </div>
+        <div class="w-[90%] m-auto flex justify-between mt-[20px] pb-[20px]">
+            <div>
+                <p>©2024 Overstocks. Tout droits réservés.</p>
+            </div>
+            <div class="flex gap-[30px]">
+                <a href="#">Mentions légales</a>
+                <a href="#">CGV</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </section>
+</footer>
 
 <!-- Lien pour Tailwind-->
 <script src="https://cdn.tailwindcss.com"></script>
