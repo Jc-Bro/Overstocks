@@ -138,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
             </label><br>
             <label id="siretLabel" style="display: none;" class="font-normal text-[26px] mb-[20px]">SIRET: <input type="text" name="siret" disabled class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
-            <button type="submit">S'inscrire</button>
+            <button type="submit" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">S'inscrire</button>
         </form>
     </section>
 </main>

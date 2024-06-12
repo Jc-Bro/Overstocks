@@ -1,4 +1,5 @@
 <?php
+global $isLoggedIn;
 session_start(); // Démarrer la session
 
 // Rediriger vers index.php si l'utilisateur n'est pas connecté ou s'il n'est pas professionnel
@@ -59,26 +60,95 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Ajouter un produit</title>
 </head>
 <body>
-<h1>Ajouter un produit</h1>
-<form action="addproduct.php" method="post" enctype="multipart/form-data">
-    <label>Nom du produit: <input type="text" name="productName" required></label><br>
-    <label>Photo du produit: <input type="file" name="productImage" accept="image/*" required></label><br>
-    <label>Description du produit: <textarea name="productDescription" required></textarea></label><br>
-    <label>Catégorie du produit:
-        <select name="productCategory" required>
-            <option value="mobilier">Mobilier</option>
-            <option value="éléctronique">Éléctronique</option>
-            <option value="matières premières">Matières premières</option>
-            <option value="textile">Textile</option>
-            <option value="mécanique">Mécanique</option>
-            <option value="autres">Autres</option>
-        </select>
-    </label><br>
-    <label>Nombre de stock: <input type="number" name="productStock"></label><br>
-    <label>Taille du produit: <input type="text" name="productSize"></label><br>
-    <label>Dimensions du produit: <input type="text" name="productDimensions"></label><br>
-    <button type="submit">Ajouter le produit</button>
-</form>
-<a href="profile.php">Retour au profil</a>
+<header>
+    <section class="bg-[#15362f] h-24 mb-[30px]">
+        <div class="align-middle flex p-4 justify-between w-[80%] m-auto">
+            <a href="../index.php"><img src="../img/logo_overstocks.png"></a>
+            <?php if ($isLoggedIn): ?>
+                <a href="profile/profile.php" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Mon compte</a>
+            <?php else: ?>
+                <div class="flex gap-6">
+                    <a href="./profile/login.php" class="flex justify-center self-center text-white border-[3px] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Se connecter</a>
+                    <a href="./profile/signup.php" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">S'inscrire</a>
+                </div>
+            <?php endif; ?>
+        </div>
+
+    </section>
+</header>
+<main>
+
+    <section class="w-[60%] m-auto mb-[50px]">
+
+            <h1 class="mb-[50px]">Ajouter un produit</h1>
+            <form action="addproduct.php" method="post" enctype="multipart/form-data">
+                <label>Nom du produit: <input type="text" name="productName" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
+                <label>Photo du produit: <input type="file" name="productImage" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" accept="image/*" required></label><br>
+                <label>Description du produit: <textarea name="productDescription" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></textarea></label><br>
+                <label>Catégorie du produit:
+                    <select name="productCategory" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required>
+                        <option value="mobilier">Mobilier</option>
+                        <option value="éléctronique">Éléctronique</option>
+                        <option value="matières premières">Matières premières</option>
+                        <option value="textile">Textile</option>
+                        <option value="mécanique">Mécanique</option>
+                        <option value="autres">Autres</option>
+                    </select>
+                </label><br>
+                <label>Nombre de stock: <input type="number" name="productStock" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
+                <label>Taille du produit: <input type="text" name="productSize" class=" my-[20px] w-[100%] border-2 border-black rounded-xl"></label><br>
+                <label>Dimensions du produit: <input type="text" name="productDimensions" class=" my-[20px] w-[100%] border-2 border-black rounded-xl"></label><br>
+                <button type="submit" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px] my-[30px]">Ajouter le produit</button>
+            </form>
+
+        <a href="profile.php" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Retour au profil</a>
+
+    </section>
+</main>
+<footer>
+    <section class="bg-[#15362f] text-white">
+        <div class="w-[90%] flex pt-[40px] m-auto">
+            <div class="w-[50%]">
+                <a><img src="../img/logo_overstocks.png"></a>
+            </div>
+            <div class="w-[16%]">
+                <h5 class="text-[25px] font-normal mb-[20px]">Profil</h5>
+                <div class="grid">
+                    <a href="#" class="mb-[10px]">Informations</a>
+                    <a href="#" class="mb-[10px]">Abonnement</a>
+                    <a href="#" class="mb-[10px]">Aide</a>
+                </div>
+            </div>
+            <div class="w-[16%]">
+                <h5 class="text-[25px] font-normal text-white mb-[20px]">Produits</h5>
+                <div class="grid">
+                    <a href="#" class="mb-[10px]">Panier</a>
+                    <a href="#" class="mb-[10px]">Achats</a>
+                    <a href="#" class="mb-[10px]">Favoris</a>
+                </div>
+            </div>
+            <div class="w-[16%]">
+                <h5 class="text-[25px] font-normal mb-[20px]">Profil</h5>
+                <div class="flex gap-[30px]">
+                    <a href="#"><img src="../img/icone_linkedin.svg"></a>
+                    <a href="#"><img src="../img/icone_instagram.svg"></a>
+                    <a href="#"><img src="../img/icone_facebook.svg"></a>
+                </div>
+            </div>
+        </div>
+        <div class="w-[90%] m-auto flex justify-between mt-[20px] pb-[20px]">
+            <div>
+                <p>©2024 Overstocks. Tout droits réservés.</p>
+            </div>
+            <div class="flex gap-[30px]">
+                <a href="#">Mentions légales</a>
+                <a href="#">CGV</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </section>
+</footer>
+<script src="https://cdn.tailwindcss.com"></script>
+
 </body>
 </html>

@@ -96,7 +96,7 @@ if (!$pdo) {
             <h3 class="text-[45px] mb-[50px] mt-[50px font-semibold">Espace vendeur</h3>
             <div class="flex gap-[30px] mb-[30px]">
                 <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
-                    <a href="#" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Ajout produit</a>
+                    <a href="addproduct.php" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Ajout produit</a>
                 </div>
                 <div class="bg-gradient-to-r from-[#A7D8D0] to-[#A7D8D050] rounded-[25px] p-0.5">
                     <a href="myproduct.php" class="grid content-center w-[400px] h-[100px] justify-center bg-gradient-to-r from-[#3FC3FB75] to-[#3FC3FB25] rounded-[25px] text-[#1B453C] font-medium text-[35px] ">Mes produits</a>

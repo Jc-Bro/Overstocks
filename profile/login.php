@@ -47,8 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-} else {
-    echo "Please use the POST method to send data.";
 }
 ?>
 
@@ -72,12 +70,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </section>
 </header>
 <main>
-    <h2>Connexion</h2>
-    <form action="login.php" method="post">
-        <label>Email: <input type="email" name="emailOfUser" required></label><br>
-        <label>Mot de passe: <input type="password" name="password" required></label><br>
-        <button type="submit">Se connecter</button>
-    </form>
+    <section class="w-[60%] m-auto mt-[30px]">
+        <div class="align-middle p-4 w-[80%] m-auto">
+            <h2 class="">Connexion</h2>
+            <form action="login.php" method="post">
+                <label class="font-normal text-[26px] mb-[20px]">Email: <input type="email" name="emailOfUser" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
+                <label class="font-normal text-[26px] mb-[20px]">Mot de passe: <input type="password" name="password" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
+                <button type="submit" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Se connecter</button>
+            </form>
+        </div>
+    </section>
 </main>
 <footer>
     <section class="bg-[#15362f] text-white">
@@ -123,5 +125,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </section>
 </footer>
 
+<script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
