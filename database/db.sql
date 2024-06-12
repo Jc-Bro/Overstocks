@@ -62,12 +62,13 @@ CREATE TABLE Product (
 -- Table ProductFromSeller
 drop table if exists ProductFromSeller;
 CREATE TABLE ProductFromSeller (
-                                   id_product INT,
-                                   id_seller INT,
-                                   cost DECIMAL(10, 2),
-                                   PRIMARY KEY (id_product, id_seller),
-                                   FOREIGN KEY (id_product) REFERENCES Product(id_product),
-                                   FOREIGN KEY (id_seller) REFERENCES Seller(id_seller)
+                        id_product INT,
+                        id_seller INT,
+                        id_user INT,
+                        cost DECIMAL(10, 2),
+                        PRIMARY KEY (id_product, id_seller),
+                        FOREIGN KEY (id_product) REFERENCES Product(id_product),
+                        FOREIGN KEY (id_seller) REFERENCES Seller(id_seller)
 );
 
 -- Table Payment

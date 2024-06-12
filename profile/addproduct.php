@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Préparer et exécuter la requête SQL pour insérer le produit
     try {
-        $sql = "INSERT INTO Product (id_user, productName, productImage, productDescription, productCategory, productStock, productSize, productDimensions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO Product (id_product, id_user, productName, productImage, productDescription, productCategory, productStock, productSize, productDimensions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(1, $userId);
         $stmt->bindParam(2, $productName);
@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <section class="w-[60%] m-auto mb-[50px]">
 
-            <h1 class="mb-[50px]">Ajouter un produit</h1>
+            <h1 class="mb-[50px] text-[45px]">Ajouter un produit</h1>
             <form action="addproduct.php" method="post" enctype="multipart/form-data">
                 <label>Nom du produit: <input type="text" name="productName" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
                 <label>Photo du produit: <input type="file" name="productImage" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" accept="image/*" required></label><br>
