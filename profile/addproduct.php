@@ -82,10 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <h1 class="mb-[50px] text-[45px]">Ajouter un produit</h1>
             <form action="addproduct.php" method="post" enctype="multipart/form-data">
-                <label>Nom du produit: <input type="text" name="productName" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
-                <label>Photo du produit: <input type="file" name="productImage" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" accept="image/*" required></label><br>
-                <label>Description du produit: <textarea name="productDescription" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></textarea></label><br>
-                <label>Catégorie du produit:
+                <label>Nom du produit* <input type="text" name="productName" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
+                <label>Photo du produit* <input type="file" name="productImage" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" accept="image/*" required></label><br>
+                <label>Description du produit* <textarea name="productDescription" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></textarea></label><br>
+                <label>Catégorie du produit*
                     <select name="productCategory" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required>
                         <option value="mobilier">Mobilier</option>
                         <option value="éléctronique">Éléctronique</option>
@@ -95,9 +95,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <option value="autres">Autres</option>
                     </select>
                 </label><br>
-                <label>Nombre de stock: <input type="number" name="productStock" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
-                <label>Taille du produit: <input type="text" name="productSize" class=" my-[20px] w-[100%] border-2 border-black rounded-xl"></label><br>
-                <label>Dimensions du produit: <input type="text" name="productDimensions" class=" my-[20px] w-[100%] border-2 border-black rounded-xl"></label><br>
+                <label>Nombre de stock* <input type="number" name="productStock" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
+                <label>Taille du produit <input type="text" name="productSize" class=" my-[20px] w-[100%] border-2 border-black rounded-xl"></label><br>
+                <label>Dimensions du produit <input type="text" name="productDimensions" class=" my-[20px] w-[100%] border-2 border-black rounded-xl"></label><br>
                 <button type="submit" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px] my-[30px]">Ajouter le produit</button>
             </form>
 
