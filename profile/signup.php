@@ -119,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 <main>
     <section class="w-[60%] m-auto mt-[30px]">
-        <h2>Inscription</h2>
+        <h2 class="mb-[50px] text-[45px]">Inscription</h2>
         <form action="signup.php" method="post">
             <div class="flex gap-[50px]">
                 <label class="font-normal text-[26px] mb-[20px]">Nom: <input type="text" name="nameOfUser" class=" my-[20px] w-[50%] border-2 border-black rounded-xl" required></label><br>

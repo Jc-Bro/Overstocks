@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <main>
     <section class="w-[60%] m-auto mt-[30px]">
         <div class="align-middle p-4 w-[80%] m-auto">
-            <h2 class="">Connexion</h2>
+            <h2 class="mb-[50px] text-[45px]">Connexion</h2>
             <form action="login.php" method="post">
                 <label class="font-normal text-[26px] mb-[20px]">Email: <input type="email" name="emailOfUser" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
                 <label class="font-normal text-[26px] mb-[20px]">Mot de passe: <input type="password" name="password" class=" my-[20px] w-[100%] border-2 border-black rounded-xl" required></label><br>
