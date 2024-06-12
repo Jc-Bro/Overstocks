@@ -56,6 +56,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error: " . $e->getMessage();
         }
     }
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+        $sql = "INSERT INTO user (nameOfUser, mailOfUser, passwordHash) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sss", $username, $email, $password);
+
+        if ($stmt->execute()) {
+            // Connecter automatiquement l'utilisateur après l'inscription
+            $user_id = $stmt->insert_id;
+            $_SESSION['user_id'] = $user_id;
+            header('Location: index.php');
+            exit();
+        } else {
+            echo "Erreur lors de l'inscription.";
+        }
+        $stmt->close();
+    }
 }
 ?>
 

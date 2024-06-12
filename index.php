@@ -5,6 +5,7 @@ session_start(); // Démarrer la session
 $isLoggedIn = isset($_SESSION['user_id']);
 
 ?>
+<!-- Partie front-->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
