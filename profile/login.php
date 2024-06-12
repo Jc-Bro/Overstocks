@@ -59,11 +59,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Connexion</title>
 </head>
 <body>
-<h2>Connexion</h2>
-<form action="login.php" method="post">
-    <label>Email: <input type="email" name="emailOfUser" required></label><br>
-    <label>Mot de passe: <input type="password" name="password" required></label><br>
-    <button type="submit">Se connecter</button>
-</form>
+<header>
+    <section class="bg-[#15362f] h-24 ">
+        <div class="align-middle flex p-4 justify-between w-[80%] m-auto">
+            <img src="../img/logo_overstocks.png">
+            <div class="flex gap-6">
+                <a href="/login.php" class="flex justify-center self-center text-white border-[3px] rounded-2xl w-[150px] pt-[6px] pb-[8px]">Se connecter</a>
+                <a href="/signup.php" class="flex justify-center self-center bg-[#0FFA9C] border-[3px] border-[#0FFA9C] rounded-2xl w-[150px] pt-[6px] pb-[8px]">S'inscrire</a>
+            </div>
+        </div>
+
+    </section>
+</header>
+<main>
+    <h2>Connexion</h2>
+    <form action="login.php" method="post">
+        <label>Email: <input type="email" name="emailOfUser" required></label><br>
+        <label>Mot de passe: <input type="password" name="password" required></label><br>
+        <button type="submit">Se connecter</button>
+    </form>
+</main>
+<footer>
+    <section class="bg-[#15362f] text-white">
+        <div class="w-[90%] flex pt-[40px] m-auto">
+            <div class="w-[50%]">
+                <a><img src="../img/logo_overstocks.png"></a>
+            </div>
+            <div class="w-[16%]">
+                <h5 class="text-[25px] font-normal mb-[20px]">Profil</h5>
+                <div class="grid">
+                    <a href="#" class="mb-[10px]">Informations</a>
+                    <a href="#" class="mb-[10px]">Abonnement</a>
+                    <a href="#" class="mb-[10px]">Aide</a>
+                </div>
+            </div>
+            <div class="w-[16%]">
+                <h5 class="text-[25px] font-normal text-white mb-[20px]">Produits</h5>
+                <div class="grid">
+                    <a href="#" class="mb-[10px]">Panier</a>
+                    <a href="#" class="mb-[10px]">Achats</a>
+                    <a href="#" class="mb-[10px]">Favoris</a>
+                </div>
+            </div>
+            <div class="w-[16%]">
+                <h5 class="text-[25px] font-normal mb-[20px]">Profil</h5>
+                <div class="flex gap-[30px]">
+                    <a href="#"><img src="../img/icone_linkedin.svg"></a>
+                    <a href="#"><img src="../img/icone_instagram.svg"></a>
+                    <a href="#"><img src="../img/icone_facebook.svg"></a>
+                </div>
+            </div>
+        </div>
+        <div class="w-[90%] m-auto flex justify-between mt-[20px] pb-[20px]">
+            <div>
+                <p>©2024 Overstocks. Tout droits réservés.</p>
+            </div>
+            <div class="flex gap-[30px]">
+                <a href="#">Mentions légales</a>
+                <a href="#">CGV</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </section>
+</footer>
+
 </body>
 </html>
